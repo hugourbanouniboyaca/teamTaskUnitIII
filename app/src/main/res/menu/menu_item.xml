@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Assign Task"
+        android:id="@+id/miAsignTask"
+        app:showAsAction="never"/>
+
+    <item android:title="Report"
+        android:id="@+id/miReportTask"
+        app:showAsAction="never"/>
+
+</menu>

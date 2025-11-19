@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManagedTaskActivity"
+    android:orientation="vertical"
+    android:background="@color/redBk">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redButton">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topBarManaged"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Managed Task"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@android:drawable/arrow_down_float"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="ASSIGN RESPONSIBLE"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/txtResponsable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="RESPONSIBLE"
+        android:layout_marginTop="10dp"
+        android:maxLength="100"
+        android:enabled="false"/>
+    <Button
+        android:id="@+id/btnAddtask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD TASK"
+        android:backgroundTint="@color/redButton"
+        android:layout_gravity="right"
+        android:enabled="false"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TASK WITHOUT RESPONSIBLE"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECT A TASK TO ADD RESPONSIBLE"
+        android:textSize="10sp"
+        android:layout_gravity="center"/>
+    <ListView
+        android:id="@+id/lvTaskWithoutResp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
