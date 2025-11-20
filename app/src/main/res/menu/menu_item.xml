@@ -10,4 +10,8 @@
         android:id="@+id/miReportTask"
         app:showAsAction="never"/>
 
+    <item android:title="Planning"
+        android:id="@+id/miPlanningTask"
+        app:showAsAction="never"/>
+
 </menu>

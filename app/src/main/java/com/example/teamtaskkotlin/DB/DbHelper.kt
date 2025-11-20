@@ -9,6 +9,7 @@ class DbHelper(context : Context) : SQLiteOpenHelper(context,Const.DATA_BASE_NAM
         if(p0!=null){
             p0.execSQL(Const.TABLE_TASK_CREATE)
             p0.execSQL(Const.TABLE_TASK_MG_CREATE)
+            p0.execSQL(Const.TABLE_TASK_PLANNING_CREATE)
         }
     }
 
@@ -16,6 +17,7 @@ class DbHelper(context : Context) : SQLiteOpenHelper(context,Const.DATA_BASE_NAM
         if(p0!=null){
             p0.execSQL(Const.TABLE_TASK_DROP)
             p0.execSQL(Const.TABLE_TASK_MG_DROP)
+            p0.execSQL(Const.TABLE_TASK_PLANNING_DROP)
         }
         onCreate(p0)
     }

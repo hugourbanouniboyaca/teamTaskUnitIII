@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this,ReportActivity::class.java))
                     true
                 }
+                R.id.miPlanningTask->{
+                    startActivity(Intent(this,PlanningTaskActivity::class.java))
+                    true
+                }
                 else->{
                     false
                 }
