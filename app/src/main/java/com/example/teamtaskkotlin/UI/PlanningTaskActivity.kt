@@ -1,4 +1,4 @@
-package com.example.teamtaskkotlin
+package com.example.teamtaskkotlin.UI
 
 import android.content.ContentValues
 import android.content.Intent
@@ -17,6 +17,8 @@ import com.example.teamtaskkotlin.Class.Task
 import com.example.teamtaskkotlin.Class.Task_Planning
 import com.example.teamtaskkotlin.DB.Const
 import com.example.teamtaskkotlin.DB.DbHelper
+import com.example.teamtaskkotlin.MainActivity
+import com.example.teamtaskkotlin.R
 import com.google.android.material.appbar.MaterialToolbar
 
 class PlanningTaskActivity : AppCompatActivity() {
@@ -43,7 +45,7 @@ class PlanningTaskActivity : AppCompatActivity() {
         //TopBar
         var topBar = findViewById<MaterialToolbar>(R.id.topBarPlanning)
         topBar.setNavigationOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         //Spiner
@@ -169,7 +171,7 @@ class PlanningTaskActivity : AppCompatActivity() {
             val db = helper.readableDatabase//Read
 
             //Select
-            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,MG.RESPONSABLE,TP.YEAR,TP.MONTH,TP.DAY,TP.HOURS FROM TASK T JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID AND T.STATUS NOT LIKE 'COMPLETED' JOIN TASK_PLANNING TP ON TP.TASK_ID = T.ID ORDER BY T.NAME"
+            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,RE.NAME,TP.YEAR,TP.MONTH,TP.DAY,TP.HOURS FROM TASK T JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID AND T.STATUS NOT LIKE 'COMPLETED' JOIN TASK_PLANNING TP ON TP.TASK_ID = T.ID JOIN RESPONSIBLE RE ON RE.DOCUMENT = MG.DOCUMENT_RESPONSIBLE ORDER BY T.NAME"
                 ,null)
             cursor.use {
                 while (it.moveToNext()){
@@ -213,7 +215,7 @@ class PlanningTaskActivity : AppCompatActivity() {
             val db = helper.readableDatabase//Read
 
             //Select
-            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,MG.RESPONSABLE FROM TASK T JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID AND T.STATUS NOT LIKE 'COMPLETED' ORDER BY T.NAME"
+            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,RE.NAME FROM TASK T JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID AND T.STATUS NOT LIKE 'COMPLETED' JOIN RESPONSIBLE RE ON RE.DOCUMENT = MG.DOCUMENT_RESPONSIBLE ORDER BY T.NAME"
                 ,null)
             cursor.use {
                 while (it.moveToNext()){
@@ -236,11 +238,18 @@ class PlanningTaskActivity : AppCompatActivity() {
     //Load Task into Spinner
     fun loadSpinnerTask(){
         listTask = listOf(Task(-1,"-- Select Task --","INACTIVE","N/A")) + selectAllTask()
-        val viewTask = listTask.map { "${it.name} [${it.status}] - ${it.responsible}" }
+        val viewTask = listTask.map {
+            if (it.id==-1L) {
+                "-- Select Task --"
+            }
+            else {
+                "${it.name} [${it.status}] - ${it.responsible}"
+            }
+        }
 
         //Adapter for ListView
-        arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,
-            viewTask)
+        arrayAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,viewTask)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spTaskPlanning.adapter = arrayAdapter
     }
 }

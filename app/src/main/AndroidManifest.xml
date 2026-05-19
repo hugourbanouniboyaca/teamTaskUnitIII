@@ -13,13 +13,16 @@
         android:theme="@style/Theme.TeamTaskKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".PlanningTaskActivity"
+            android:name=".UI.ActivityResponsible"
             android:exported="false" />
         <activity
-            android:name=".ReportActivity"
+            android:name=".UI.PlanningTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".ManagedTaskActivity"
+            android:name=".UI.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.ManagedTaskActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

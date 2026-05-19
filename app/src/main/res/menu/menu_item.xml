@@ -14,4 +14,8 @@
         android:id="@+id/miPlanningTask"
         app:showAsAction="never"/>
 
+    <item android:title="Responsable"
+        android:id="@+id/miResponsable"
+        app:showAsAction="never"/>
+
 </menu>

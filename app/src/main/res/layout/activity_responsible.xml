@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ManagedTaskActivity"
+    tools:context=".UI.ActivityResponsible"
     android:orientation="vertical"
     android:background="@color/redBk">
 
@@ -14,62 +14,55 @@
         android:layout_height="wrap_content"
         android:background="@color/redButton">
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topBarManaged"
+            android:id="@+id/topBarResponsable"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Managed Task"
+            app:title="Responsable"
             app:titleTextColor="@color/white"
             app:navigationIcon="@android:drawable/arrow_down_float"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="ASSIGN RESPONSIBLE"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        android:text="RESPONSIBLES"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/txtResponsable"
+    <EditText
+        android:id="@+id/txtResponsableName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginTop="10dp"
-        android:maxLength="100"
-        android:enabled="false"/>
-    <Spinner
-        android:id="@+id/spResponsibles"
+        android:hint="Resposible Name"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/txtResponsableDocument"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_style"
-        android:padding="2dp"
-        android:layout_marginTop="5dp"/>
+        android:hint="Resposible Document"
+        android:inputType="number"/>
+    <EditText
+        android:id="@+id/txtResponsablePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Resposible Phone"
+        />
+
     <Button
-        android:id="@+id/btnAddtask"
+        android:id="@+id/btnCreateResponsable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD TASK"
-        android:backgroundTint="@color/redButton"
+        android:text="Create"
+        android:layout_margin="15dp"
         android:layout_gravity="right"
-        android:enabled="false"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TASK WITHOUT RESPONSIBLE"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SELECT A TASK TO ADD RESPONSIBLE"
-        android:textSize="10sp"
-        android:layout_gravity="center"/>
+        android:backgroundTint="@color/redButton"
+        />
+
     <ListView
-        android:id="@+id/lvTaskWithoutResp"
+        android:id="@+id/lvResponsableList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 </LinearLayout>

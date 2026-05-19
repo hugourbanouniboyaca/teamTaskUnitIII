@@ -2,8 +2,8 @@ package com.example.teamtaskkotlin.DB
 
 class Const {
     companion object{
-        val DATA_BASE_NAME = "dbTask2.db"
-        val DATA_BASE_VERSION = 2
+        val DATA_BASE_NAME = "dbTask202610.db"
+        val DATA_BASE_VERSION = 3
 
         //TASK
         val TABLE_TASK_CREATE = "CREATE TABLE [TASK] (\n" +
@@ -20,7 +20,7 @@ class Const {
         val TABLE_TASK_MG_CREATE = "CREATE TABLE [TASK_MANAGER] (\n" +
                 "[ID] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                 "[TASK_ID] TEXT  NOT NULL, \n" +
-                "[RESPONSABLE] TEXT  NOT NULL \n" +
+                "[DOCUMENT_RESPONSIBLE] INTEGER  NOT NULL \n" +
                 ")"
 
         val TABLE_TASK_MG_DROP = "DROP TABLE IF EXISTS TASK_MANAGER"
@@ -40,6 +40,17 @@ class Const {
         val TABLE_TASK_PLANNING_DROP = "DROP TABLE IF EXISTS TASK_PLANNING"
 
         val TABLE_TASK_PLANNING_NAME = "TASK_PLANNING"
+
+        //RESPONSIBLE
+        val TABLE_RESPONSIBLE_CREATE = "CREATE TABLE [RESPONSIBLE] (\n" +
+                "[DOCUMENT] INTEGER  NOT NULL PRIMARY KEY,\n" +
+                "[NAME] TEXT  NOT NULL, \n" +
+                "[PHONE] TEXT  NOT NULL, \n" +
+                "[STATE] TEXT  NOT NULL)"
+
+        val TABLE_RESPONSIBLE_DROP = "DROP TABLE IF EXISTS RESPONSIBLE"
+
+        val TABLE_RESPONSIBLE_NAME = "RESPONSIBLE"
 
     }
 }

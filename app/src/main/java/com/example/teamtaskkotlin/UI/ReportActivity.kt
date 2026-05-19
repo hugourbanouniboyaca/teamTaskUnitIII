@@ -1,9 +1,7 @@
-package com.example.teamtaskkotlin
+package com.example.teamtaskkotlin.UI
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.webkit.WebView.FindListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -15,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.teamtaskkotlin.Class.Task
 import com.example.teamtaskkotlin.DB.Const
 import com.example.teamtaskkotlin.DB.DbHelper
+import com.example.teamtaskkotlin.MainActivity
+import com.example.teamtaskkotlin.R
 import com.google.android.material.appbar.MaterialToolbar
 
 class ReportActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class ReportActivity : AppCompatActivity() {
         //TopBar
         var topBar = findViewById<MaterialToolbar>(R.id.topBarReport)
         topBar.setNavigationOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         //lISTvIEW
@@ -73,8 +73,7 @@ class ReportActivity : AppCompatActivity() {
             val db = helper.readableDatabase//Read
 
             //Select
-            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,COALESCE(MG.RESPONSABLE,'N/A') AS RESPONSABLE FROM TASK T LEFT JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID ORDER BY T.STATUS,T.NAME"
-                ,null)
+            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,COALESCE(RE.NAME,'N/A') AS RESPONSIBLE FROM TASK T LEFT JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID LEFT JOIN RESPONSIBLE RE ON RE.DOCUMENT = MG.DOCUMENT_RESPONSIBLE ORDER BY T.NAME",null)
             cursor.use {
                 while (it.moveToNext()){
                     val id = it.getLong(0)//ID
@@ -111,8 +110,9 @@ class ReportActivity : AppCompatActivity() {
             var helper = DbHelper(baseContext)
             val db = helper.writableDatabase//Read
 
-            //Update
-            return db.delete(Const.TABLE_TASK_NAME,"ID = ?", arrayOf(idTask.toString()))>0
+            //DELETE
+            var delTask = db.delete(Const.TABLE_TASK_NAME,"ID = ?", arrayOf(idTask.toString()))
+            return delTask>0
 
         }
         catch (e: Exception) {

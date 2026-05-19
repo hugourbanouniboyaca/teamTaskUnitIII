@@ -16,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.teamtaskkotlin.Class.Task
 import com.example.teamtaskkotlin.DB.Const
 import com.example.teamtaskkotlin.DB.DbHelper
+import com.example.teamtaskkotlin.UI.ActivityResponsible
+import com.example.teamtaskkotlin.UI.ManagedTaskActivity
+import com.example.teamtaskkotlin.UI.PlanningTaskActivity
+import com.example.teamtaskkotlin.UI.ReportActivity
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -42,15 +46,19 @@ class MainActivity : AppCompatActivity() {
                 MenuItem ->
             when(MenuItem.itemId){
                 R.id.miAsignTask->{
-                    startActivity(Intent(this,ManagedTaskActivity::class.java))
+                    startActivity(Intent(this, ManagedTaskActivity::class.java))
                     true
                 }
                 R.id.miReportTask->{
-                    startActivity(Intent(this,ReportActivity::class.java))
+                    startActivity(Intent(this, ReportActivity::class.java))
                     true
                 }
                 R.id.miPlanningTask->{
-                    startActivity(Intent(this,PlanningTaskActivity::class.java))
+                    startActivity(Intent(this, PlanningTaskActivity::class.java))
+                    true
+                }
+                R.id.miResponsable->{
+                    startActivity(Intent(this, ActivityResponsible::class.java))
                     true
                 }
                 else->{
@@ -117,8 +125,7 @@ class MainActivity : AppCompatActivity() {
             val db = helper.readableDatabase//Read
 
             //Select
-            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,COALESCE(MG.RESPONSABLE,'N/A') AS RESPONSABLE FROM TASK T LEFT JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID ORDER BY T.NAME"
-                ,null)
+            val cursor = db.rawQuery("SELECT T.ID,T.NAME,T.STATUS,COALESCE(RE.NAME,'N/A') AS RESPONSIBLE FROM TASK T LEFT JOIN TASK_MANAGER MG ON MG.TASK_ID = T.ID LEFT JOIN RESPONSIBLE RE ON RE.DOCUMENT = MG.DOCUMENT_RESPONSIBLE ORDER BY T.NAME",null)
             cursor.use {
                 while (it.moveToNext()){
                     val id = it.getLong(0)//ID
